@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dosirak.web.dao.GiftDAO">
+	<select id="getGift" resultType="com.dosirak.web.vo.Gift">
+		SELECT * FROM GIFT WHERE GCODE = #{gCode}
+	</select>
+	
+	<select id="getGiftList" resultType="com.dosirak.web.vo.Gift">
+		SELECT * FROM GIFT
+	</select>
+	
+	<insert id="takeGift">
+		INSERT INTO ITEM
+		VALUES(#{param1.gCode}, #{param1.gName}, #{param1.city}, #{param1.imgName}, #{param1.info});
+	</insert>
+
+</mapper>

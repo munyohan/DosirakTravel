@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dosirak.web.dao.TicketDAO">
+
+	<select id="getTicket" resultType="com.dosirak.web.vo.Ticket">
+		SELECT * FROM TICKET WHERE TCODE = #{tCode}
+	</select>
+	
+	<select id="getTicketList" resultType="com.dosirak.web.vo.Ticket">
+		SELECT * FROM TICKET
+	</select>
+	
+</mapper>
