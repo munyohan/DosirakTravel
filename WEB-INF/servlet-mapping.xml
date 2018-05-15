@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- "어느 패키지를 설정해줄까"를 해주는 애다. 자동으로 스캔해 연결해준다.-->
+    <context:component-scan base-package="com.dosirak.web.controllers, com.dosirak.web.dao"></context:component-scan>
+    
+    <bean name="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+    	<property name="url" value="jdbc:oracle:thin:@211.238.142.15:1521:orcl"></property>
+    	<property name="username" value="DOSIRAK"></property>
+    	<property name="password" value="ticket"></property>
+    </bean>
+    
+    <bean name="ptm" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="ds"></property>
+    </bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="dataSource" ref="ds"></property>
+    	<property name="mapperLocations" value="classpath*:com/dosirak/web/dao/mapper/*.xml" />
+    </bean>
+    
+    <!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+  		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean> -->
+   
+   <bean name="PlayerDAO" class="com.dosirak.web.dao.PlayerDAOImpl">
+   		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+   </bean>
+   
+  	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>                                            
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/plain;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+</beans>

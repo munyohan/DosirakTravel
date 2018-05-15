@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dosirak.web.dao.CountryDAO">
+
+	<select id="getCountry" resultType="com.dosirak.web.vo.Country">
+		SELECT * FROM COUNTRY WHERE COUNTRY = #{country}
+	</select>
+
+	<select id="getCountryList" resultType="com.dosirak.web.vo.Country">
+		SELECT * FROM COUNTRY
+	</select>
+
+</mapper>
