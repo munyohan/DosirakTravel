@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dosirak.web.dao.GuestNoteDAO">
+	<select id="getGuestNoteList" resultType="com.dosirak.web.vo.GuestNote">
+		SELECT * FROM GUESTNOTE WHERE HOST = #{host}
+	</select>
+	
+	<insert id="addGuestNote">
+		INSERT INTO GUESTNOTE
+		VALUES(#{gSeq}, #{content}, #{visitor}, #{host}, #{regdate})
+	</insert>
+</mapper>
