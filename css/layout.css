@@ -1,0 +1,15 @@
+@font-face {
+	font-family: 'Omni Gothic';
+	src: url("../fonts/OmniGothic040.woff");
+}
+
+a, a:link, a:active, a:checked, a:focus {
+	text-decoration: none;
+	color: black;
+}
+
+body {
+	box-sizing: border-box;
+	background-color: #D0DAA8;
+	font-family: 'Omni Gothic';
+}
