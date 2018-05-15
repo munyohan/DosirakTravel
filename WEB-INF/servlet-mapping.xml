@@ -23,12 +23,16 @@
     
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource" ref="ds"></property>
-    	<property name="mapperLocations" value="classpath*:com/sist/web/dao/mapper/*.xml" />
+    	<property name="mapperLocations" value="classpath*:com/dosirak/web/dao/mapper/*.xml" />
     </bean>
     
     <!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
   		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean> -->
+   
+   <bean name="PlayerDAO" class="com.dosirak.web.dao.PlayerDAOImpl">
+   		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+   </bean>
    
   	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">

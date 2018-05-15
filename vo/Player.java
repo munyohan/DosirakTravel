@@ -8,8 +8,15 @@ public class Player {
 	private String isOnline;
 	private String date;
 	private String loc;
+	private String nickname;
 	
 	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getMid() {
 		return mid;
 	}
