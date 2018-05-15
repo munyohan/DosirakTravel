@@ -10,7 +10,7 @@
    <!-- 인자가 하나일 경우 변수명 그대로 -->
    
    <insert id="addPlayer">
-      INSERT INTO PLAYER VALUES(#{mid}, #{pwd}, #{gold}, #{status}, #{isOnline}, #{date}, #{loc})
+      INSERT INTO PLAYER(MID, PWD, GOLD, STATUS, ISONLINE, REGDATE, NICKNAME) VALUES(#{mid}, #{pwd}, 0, 'HOME', 'NO', SYSDATE, #{nickname})
    </insert>
    
 </mapper>
