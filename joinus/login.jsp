@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style type="text/css">
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 html, body {
@@ -254,17 +255,19 @@ html, body {
 </head>
 <body>
 <div class="form-structor">
-	<form action="join.do" method="post">
+	<form action="join.do" method="post" id="tmp1">
 		<div class="signup">
 			<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
 			<div class="form-holder">
-				<input name="mid" type="email" class="input" placeholder="Email" />
-				<input name="pwd" type="password" class="input" placeholder="Password" />
-				<input name="nickname" type="text" class="input" placeholder="Name" />
+				<input id="mid" name="mid" type="email" class="input" placeholder="Email" required="required"/>
+				<input id="pwd" name="pwd" type="password" class="input" placeholder="Password" required="required"/>
+				<input id="pwdck" name="pwdck" type="password" class="input" placeholder="Password Check" required="required"/>
+				<input id="nickname" name="nickname" type="text" class="input" placeholder="Name" required="required"/>
 			</div>
 			<button class="submit-btn">Sign up</button>
 		</div>
 	</form>
+	
 	<form action="login.do" method="post">
 		<div class="login slide-up">
 			<div class="center">
@@ -285,25 +288,36 @@ const loginBtn = document.getElementById('login');
 const signupBtn = document.getElementById('signup');
 
 loginBtn.addEventListener('click', (e) => {
-	let parent = e.target.parentNode.parentNode;
-	Array.from(e.target.parentNode.parentNode.classList).find((element) => {
-		if(element !== "slide-up") {
-			parent.classList.add('slide-up')
-		}else{
-			signupBtn.parentNode.classList.add('slide-up')
-			parent.classList.remove('slide-up')
-		}
-	});
+   let parent = e.target.parentNode.parentNode;
+   Array.from(e.target.parentNode.parentNode.classList).find((element) => {
+      if(element !== "slide-up") {
+         parent.classList.add('slide-up')
+      }else{
+         signupBtn.parentNode.classList.add('slide-up')
+         parent.classList.remove('slide-up')
+      }
+   });
 });
 
 signupBtn.addEventListener('click', (e) => {
-	let parent = e.target.parentNode;
-	Array.from(e.target.parentNode.classList).find((element) => {
-		if(element !== "slide-up") {
-			parent.classList.add('slide-up')
-		}else{
-			loginBtn.parentNode.parentNode.classList.add('slide-up')
-			parent.classList.remove('slide-up')
+   let parent = e.target.parentNode;
+   Array.from(e.target.parentNode.classList).find((element) => {
+      if(element !== "slide-up") {
+         parent.classList.add('slide-up')
+      }else{
+         loginBtn.parentNode.parentNode.classList.add('slide-up')
+         parent.classList.remove('slide-up')
+      }
+   });
+});
+
+$(function() {
+	$("#tmp1").submit(function(event) {
+		if( $("#pwd").val() != $("#pwdck").val() ) {
+			alert("비밀번호가 일치하지 않습니다.");
+			event.preventDefault();
+		} else {
+			alert("회원가입이 완료 되었습니다.");
 		}
 	});
 });
