@@ -5,7 +5,14 @@ public class Friend {
 	private String mid;
 	private String fid;
 	private String regdate;
+	private String imgName;
 	
+	public String getImgName() {
+		return imgName;
+	}
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
 	public int getfCode() {
 		return fCode;
 	}
