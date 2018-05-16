@@ -48,14 +48,15 @@ public class JoinusControllers {
 			System.out.println("로그인 성공");
 			session.setAttribute("mid", mid);
 			session.setAttribute("nickname", player.getNickname());
-			return "redirect:welcomelogin.do"; //웰컴 로그인 창 만들지 말지 결정해야됨
+//			return "redirect:welcomelogin.do"; //웰컴 로그인 창 만들지 말지 결정해야됨
+			return "redirect:../house/main.do";
 		}
 	}
 	
-	@RequestMapping(value={"join.do"}, method=RequestMethod.GET)
-	public String join() {
-		return "join.jsp";
-	}
+//	@RequestMapping(value={"join.do"}, method=RequestMethod.GET)
+//	public String join() {
+//		return "join.jsp";
+//	}
 	
 	@RequestMapping(value={"join.do"}, method=RequestMethod.POST)
 	public String join(Player player) {
