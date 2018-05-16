@@ -17,8 +17,8 @@
 		var result = 0;
 		setTimer = setInterval(function(){
 			result = Math.floor(Math.random() * 6) + 1;
-			var p1 = document.getElementById("p1");
-			p1.innerHTML = result;
+			/* var p1 = document.getElementById("p1");
+			p1.innerHTML = result; */
 			var img1 = document.getElementById("frog1");
 			var house1 = document.getElementById("house1");
 			var house2 = document.getElementById("house2");
