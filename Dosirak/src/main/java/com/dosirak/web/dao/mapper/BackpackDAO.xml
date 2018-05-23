@@ -8,4 +8,19 @@
 		SELECT * FROM BACKPACK WHERE OWNER = #{owner}
 	</select>
 
+	<select id="getBackpackimg" resultType="com.dosirak.web.vo.Backpack">
+		SELECT B.OWNER,
+			   B.DCODE,
+			   B.MCODE,
+			   B.TCODE,
+			   B.PCODE,
+			   D.IMGNAME AS DIMGNAME,
+			   T.IMGNAME AS TIMGNAME
+	      FROM BACKPACK B LEFT OUTER JOIN DOSIRAK D
+		    ON B.DCODE = D.DCODE
+          LEFT OUTER JOIN TICKET T
+            ON B.TCODE = T.TCODE
+		  WHERE B.OWNER LIKE #{owner}
+	</select>
+
 </mapper>

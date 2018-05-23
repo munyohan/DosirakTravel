@@ -25,4 +25,22 @@ public class ItemDAOImpl extends SqlSessionDaoSupport implements ItemDAO{
 		ItemDAO idao = getSqlSession().getMapper(ItemDAO.class);
 		return idao.dropItem(seq);
 	}
+
+	@Override
+	public List<Item> getUserDosirak(String owner) {
+		ItemDAO idao = getSqlSession().getMapper(ItemDAO.class);
+		return idao.getUserDosirak(owner);
+	}
+
+	@Override
+	public List<Item> getUserTicket(String owner) {
+		ItemDAO idao = getSqlSession().getMapper(ItemDAO.class);
+		return idao.getUserTicket(owner);
+	}
+
+	@Override
+	public List<Item> getUserGift(String owner) {
+		ItemDAO idao = getSqlSession().getMapper(ItemDAO.class);
+		return idao.getUserGift(owner);
+	}
 }

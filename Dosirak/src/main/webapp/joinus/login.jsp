@@ -253,29 +253,32 @@ html, body {
 </head>
 <body>
 	<div class="form-structor">
-		<div class="signup">
-			<h2 class="form-title" id="signup">회원가입</h2>
-			<div class="form-holder">
-				<input type="email" class="input" placeholder="Email" />
-				<input type="text" class="input" placeholder="NickName" />
-				<input type="password" class="input" placeholder="Password" />
-				<input type="password" class="input" placeholder="PasswordCheck" />
-			</div>
-			<button class="submit-btn">가입</button>
-		</div>
-		<form action="../house/main.jsp">
-			<div class="login slide-up">
-				<div class="center">
-					<h2 class="form-title" id="login">로그인</h2>
-					<div class="form-holder">
-						<input type="email" class="input" placeholder="Email" />
-						<input type="password" class="input" placeholder="Password" />
-					</div>
-					<button class="submit-btn">출발</button>
-				</div>
-			</div>
-		</form>
-		</div>
+      <form action="join.do" method="post">
+         <div class="signup">
+            <h2 class="form-title" id="signup">회원가입</h2>
+            <div class="form-holder">
+               <input id="mid" type="email" class="input" placeholder="Email" />
+               <input id="nickname" type="text" class="input" placeholder="NickName" />
+               <input id="pwd" type="password" class="input" placeholder="Password" />
+               <input id="pwdcheck" type="password" class="input" placeholder="PasswordCheck" />
+            </div>
+            <button class="submit-btn">가입</button>
+         </div>
+      </form>
+      
+      <form action="login.do" method="post">
+         <div class="login slide-up">
+            <div class="center">
+               <h2 class="form-title" id="login">로그인</h2>
+               <div class="form-holder">
+                  <input id="mid" name="mid" type="email" class="input" placeholder="Email" />
+                  <input id="pwd" name="pwd" type="password" class="input" placeholder="Password" />
+               </div>
+               <button class="submit-btn">출발</button>
+            </div>
+         </div>
+      </form>
+   </div>
 <script type="text/javascript">
 console.clear();
 

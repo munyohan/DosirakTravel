@@ -6,9 +6,10 @@ public class Item {
 	private int mCode;
 	private int tCode;
 	private int pCode;
-	private String name;
+	private String itemkind;
 	private int amount;
 	private String owner;
+	private String imgname;
 	
 	public int getSeq() {
 		return seq;
@@ -40,11 +41,11 @@ public class Item {
 	public void setpCode(int pCode) {
 		this.pCode = pCode;
 	}
-	public String getName() {
-		return name;
+	public String getItemkind() {
+		return itemkind;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setItemkind(String itemkind) {
+		this.itemkind = itemkind;
 	}
 	public int getAmount() {
 		return amount;
@@ -57,6 +58,12 @@ public class Item {
 	}
 	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+	public String getImgname() {
+		return imgname;
+	}
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
 	}
 	
 }

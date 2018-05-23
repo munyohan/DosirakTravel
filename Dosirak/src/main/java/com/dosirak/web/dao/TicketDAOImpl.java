@@ -25,4 +25,10 @@ public class TicketDAOImpl extends SqlSessionDaoSupport implements TicketDAO{
 		TicketDAO tdao = getSqlSession().getMapper(TicketDAO.class);
 		return tdao.takeTicket(owner);
 	}
+
+	@Override
+	public Ticket getTicketimg(String imgName) {
+		TicketDAO tdao = getSqlSession().getMapper(TicketDAO.class);
+		return tdao.getTicketimg(imgName);
+	}
 }

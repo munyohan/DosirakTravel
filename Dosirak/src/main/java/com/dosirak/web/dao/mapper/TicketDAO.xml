@@ -8,6 +8,10 @@
 		SELECT * FROM TICKET WHERE TCODE = #{tCode}
 	</select>
 	
+	<select id="getTicketimg" resultType="com.dosirak.web.vo.Ticket">
+		SELECT * FROM TICKET WHERE IMGNAME LIKE #{imgName}
+	</select>
+	
 	<select id="getTicketList" resultType="com.dosirak.web.vo.Ticket">
 		SELECT * FROM TICKET
 	</select>

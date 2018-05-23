@@ -8,6 +8,10 @@
 		SELECT * FROM DOSIRAK WHERE DCODE = #{dCode}
 	</select>
 
+	<select id="getDosirakimg" resultType="com.dosirak.web.vo.Dosirak">
+		SELECT * FROM DOSIRAK WHERE IMGNAME LIKE #{imgName}
+	</select>
+	
 	<select id="getDosirakList" resultType="com.dosirak.web.vo.Dosirak">
 		SELECT * FROM DOSIRAK
 	</select>

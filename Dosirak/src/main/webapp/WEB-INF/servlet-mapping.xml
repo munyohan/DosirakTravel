@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- "어느 패키지를 설정해줄까"를 해주는 애다. 자동으로 스캔해 연결해준다.-->
-    <context:component-scan base-package="com.dosirak.web.controllers, com.dosirak.web.dao"></context:component-scan>
+    <context:component-scan base-package="com.dosirak.web.*"></context:component-scan>
     
     <bean name="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
@@ -31,6 +31,26 @@
 	</bean> -->
    
    <bean name="PlayerDAO" class="com.dosirak.web.dao.PlayerDAOImpl">
+   		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+   </bean>
+   
+   <bean name="ItemDAO" class="com.dosirak.web.dao.ItemDAOImpl">
+   		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+   </bean>
+   
+   <bean name="DosirakDAO" class="com.dosirak.web.dao.DosirakDAOImpl">
+   		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+   </bean>
+   
+   <bean name="TicketDAO" class="com.dosirak.web.dao.TicketDAOImpl">
+   		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+   </bean>
+   
+   <bean name="GiftDAO" class="com.dosirak.web.dao.GiftDAOImpl">
+   		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+   </bean>
+   
+    <bean name="BackpackDAO" class="com.dosirak.web.dao.BackpackDAOImpl">
    		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
    </bean>
    

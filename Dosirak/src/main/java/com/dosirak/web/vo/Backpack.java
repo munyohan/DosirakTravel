@@ -6,8 +6,9 @@ public class Backpack {
 	private int mCode;
 	private int tCode;
 	private int pCode;
-	
-	
+	private String dimgname;
+	private String timgname;
+
 	public String getOwner() {
 		return owner;
 	}
@@ -37,6 +38,18 @@ public class Backpack {
 	}
 	public void setpCode(int pCode) {
 		this.pCode = pCode;
+	}
+	public String getDimgname() {
+		return dimgname;
+	}
+	public void setDimgname(String dimgname) {
+		this.dimgname = dimgname;
+	}
+	public String getTimgname() {
+		return timgname;
+	}
+	public void setTimgname(String timgname) {
+		this.timgname = timgname;
 	}
 	
 }

@@ -11,4 +11,10 @@ public class BackpackDAOImpl extends SqlSessionDaoSupport implements BackpackDAO
 		BackpackDAO bdao = getSqlSession().getMapper(BackpackDAO.class);
 		return bdao.getBackpack(owner);
 	}
+
+	@Override
+	public Backpack getBackpackimg(String owner) {
+		BackpackDAO bdao = getSqlSession().getMapper(BackpackDAO.class);
+		return bdao.getBackpackimg(owner);
+	}
 }

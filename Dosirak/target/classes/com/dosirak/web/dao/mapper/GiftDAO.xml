@@ -11,6 +11,10 @@
 		SELECT * FROM GIFT
 	</select>
 	
+	<select id="getGiftimg" resultType="com.dosirak.web.vo.Gift">
+		SELECT * FROM GIFT WHERE IMGNAME LIKE #{imgName}
+	</select>
+	
 	<insert id="takeGift">
 		INSERT INTO ITEM
 		VALUES(#{param1.gCode}, #{param1.gName}, #{param1.city}, #{param1.imgName}, #{param1.info});

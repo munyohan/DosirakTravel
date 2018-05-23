@@ -20,4 +20,25 @@
 	<delete id="dropItem">
 		DELETE ITEM WHERE SEQ = #{seq}
 	</delete>
+	
+	<select id="getUserDosirak" resultType="com.dosirak.web.vo.Item">
+		SELECT * FROM ITEM I LEFT OUTER JOIN DOSIRAK D
+		    ON I.DCODE = D.DCODE
+		  WHERE I.OWNER LIKE #{owner}
+            AND I.ITEMKIND LIKE '도시락'
+	</select>
+		
+	<select id="getUserTicket" resultType="com.dosirak.web.vo.Item">
+		SELECT * FROM ITEM I LEFT OUTER JOIN TICKET T
+		    ON I.TCODE = T.TCODE
+		  WHERE I.OWNER LIKE #{owner}
+            AND I.ITEMKIND LIKE '티켓'
+	</select>
+	
+	<select id="getUserGift" resultType="com.dosirak.web.vo.Item">
+		SELECT * FROM ITEM I LEFT OUTER JOIN GIFT G
+		    ON I.GCODE = G.GCODE
+		  WHERE I.OWNER LIKE #{owner}
+            AND I.ITEMKIND LIKE '명물'
+	</select>
 </mapper>

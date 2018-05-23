@@ -22,15 +22,20 @@ public class JoinusControllers {
 	
 	@RequestMapping(value={"login.do"}, method=RequestMethod.GET)
 	public String login() {
-		
+		System.out.println("midZZZZ");
 		return "login.jsp";
 		
 	}
+	
 	@RequestMapping(value={"login.do"}, method=RequestMethod.POST)
 	public String login(String mid, String pwd, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
 		System.out.println("mid : " + mid);
 		Player player = plDao.getPlayer(mid);
+		
+		/*HttpSession session = request.getSession();
+	    String mid = (String)session.getAttribute("mid");
+	    model.addAttribute("mid", mid);*/
 		
 		HttpSession session = request.getSession();
 		
@@ -48,7 +53,10 @@ public class JoinusControllers {
 			System.out.println("로그인 성공");
 			session.setAttribute("mid", mid);
 			session.setAttribute("nickname", player.getNickname());
-			return "redirect:welcomelogin.do"; //웰컴 로그인 창 만들지 말지 결정해야됨
+			
+			System.out.println("mid : " + mid);
+			
+			return "redirect:../house/main.do"; //웰컴 로그인 창 만들지 말지 결정해야됨
 		}
 	}
 	

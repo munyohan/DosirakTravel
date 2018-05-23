@@ -15,6 +15,12 @@ public class DosirakDAOImpl extends SqlSessionDaoSupport implements DosirakDAO {
 	}
 
 	@Override
+	public Dosirak getDosirakimg(String imgName) {
+		DosirakDAO dodao = getSqlSession().getMapper(DosirakDAO.class);
+		return dodao.getDosirakimg(imgName);
+	}
+	
+	@Override
 	public List<Dosirak> getDosirakList() {
 		DosirakDAO dodao = getSqlSession().getMapper(DosirakDAO.class);
 		return dodao.getDosirakList();

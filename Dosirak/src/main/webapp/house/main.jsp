@@ -42,13 +42,13 @@
 		
 		
 		<div style="position: absolute; top: 150px; left: 1350px;">
-			<a href="inventory.jsp" class="btn btn-warning btn-group-sm btni"><img  class ="icon" src="../images/backpack.png"/> 내가방</a>
+			<a href="inventory.do" class="btn btn-warning btn-group-sm btni"><img  class ="icon" src="../images/backpack.png"/> 내가방</a>
 		</div>
 	 	<div style="position: absolute; top: 230px; left: 1350px;">
 			<a href="collection.jsp" class="btn btn-warning btn-group-sm btni"><img  class ="icon" src="../images/inventory.png"/> 수집품</a>
 		</div>
 		<div style="position: absolute; top: 310px; left: 1350px;">
-			<a href="../shop/shop.jsp" class="btn btn-warning btn-group-sm btni"><img  class ="icon" src="../images/store.png"/> 상점  </a>
+			<a href="../shop/shop.jsp" class="btn btn-warning btn-group-sm btni"><img  class ="icon" src="../images/store.png"/> 상점 </a>
 		</div>		
 		<div style="position: absolute; top: 390px; left: 1350px;">
 			<a href="#" class="btn btn-warning btn-group-sm btni"><img  class ="icon" src="../images/history.png"/> 히스토리</a>
@@ -119,19 +119,25 @@
 					<p>외 출</p>
 				</div>
 				<div class="modal-body">
-					<div class="modal-btns btn-1">
-						<a href="#" class="">
-							<img class ="modalIcon" src="../images/world.png"/>
-							<div class="btn-text">여 행</div>
-						</a>
-					</div>
 					
-					<div class="modal-btns btn-2">
-						<a href="#" class="">
-							<img class ="modalIcon" src="../images/coins.png"/>
-							<div class="btn-text">일</div>
-						</a>
-					</div>
+					<form action="travelProc.do" method="post">
+						<div class="modal-btns btn-1">
+							<a href="#" class="">
+								<img class ="modalIcon" src="../images/world.png"/>
+								<div class="btn-text">여 행</div>
+							</a>
+						</div>
+					</form>
+					
+					<form action="workProc.do" method="post">
+						<div class="modal-btns btn-2">
+							<a href="#" class="">
+								<img class ="modalIcon" src="../images/coins.png"/>
+								<div class="btn-text">일</div>
+							</a>
+						</div>
+					</form>
+				
 				</div>
 				<div class="modal-footer">
 					<a href="#" id="exitBtn" class="btn btn-warning"><img id ="logoutModalIcon" src="../images/exit.png"/>나가기</a>
