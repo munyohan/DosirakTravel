@@ -12,9 +12,48 @@
 		SELECT * FROM ITEM WHERE OWNER = #{owner}
 	</select>
 	
-	<insert id="takeItem">
+	<select id="getDamount" resultType="com.dosirak.web.vo.Item">
+		SELECT * FROM ITEM WHERE OWNER = '${param1}' AND DCODE = ${param2} 
+	</select>
+	
+	<select id="getTamount" resultType="com.dosirak.web.vo.Item">
+		SELECT * FROM ITEM WHERE OWNER = '${param1}' AND TCODE = ${param2} 
+	</select>
+	
+	<!-- <insert id="takeItem">
 		INSERT INTO ITEM
 		VALUES(#{param1.seq}, #{param1.dCode}, #{param1.mCode}, #{param1.tCode}, #{param1.pCode}, #{param1.name}, #{param1.amount}, #{param2});
+	</insert> -->
+	
+	<!-- <insert id="addNotice">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(SEQ))+1 FROM NOTICES
+		</selectKey>
+		INSERT INTO NOTICES VALUES(#{seq}, #{title}, #{writer}, #{content}, SYSDATE, 0, #{filename, jdbcType=VARCHAR})
+	</insert> -->
+	
+	<!-- <insert id="takeDosirakItem">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(SEQ))+1 FROM ITEM
+		</selectKey>
+		INSERT INTO ITEM
+		VALUES(#{seq}, #{dCode}, 0, 0, 0, '도시락', #{amount}, #{owner});
+	</insert>
+	
+	<insert id="takeTicketItem">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(SEQ))+1 FROM ITEM
+		</selectKey>
+		INSERT INTO ITEM
+		VALUES(#{seq}, 0, 0, #{tCode}, 0, '티켓', #{amount}, #{owner});
+	</insert> -->
+	
+	<insert id="takeItem">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(SEQ))+1 FROM ITEM
+		</selectKey>
+		INSERT INTO ITEM
+		VALUES(#{seq}, #{param2.dCode}, #{param2.mCode}, #{param2.tCode}, #{param2.pCode}, #{param2.itemkind}, #{param2.amount}, #{param1})
 	</insert>
 	
 	<delete id="dropItem">
@@ -41,4 +80,49 @@
 		  WHERE I.OWNER LIKE #{owner}
             AND I.ITEMKIND LIKE '명물'
 	</select>
+	
+	<update id="updateCancelDosirak">
+		UPDATE ITEM 
+   		   SET AMOUNT = AMOUNT+1 
+ 		 WHERE DCODE = ${param1} 
+           AND ITEMKIND LIKE '도시락' 
+           AND OWNER LIKE '${param2}'
+	</update>
+	
+	<update id="updateCancelTicket">
+		UPDATE ITEM 
+   		   SET AMOUNT = AMOUNT+1 
+ 		 WHERE TCODE = ${param1} 
+           AND ITEMKIND LIKE '티켓' 
+           AND OWNER LIKE '${param2}'
+	</update>
+	
+	<!-- <delete id="delNotice">
+		DELETE NOTICES WHERE SEQ = #{seq}
+	</delete> -->
+	
+	<delete id="deleteDosirak">
+		DELETE ITEM WHERE OWNER LIKE '${param1}' AND DCODE = ${param2}
+	</delete>
+	
+	<delete id="deleteTicket">
+		DELETE ITEM WHERE OWNER LIKE '${param1}' AND TCODE = ${param2}
+	</delete>
+	
+	<update id="updateRegDosirak">
+		UPDATE ITEM 
+   		   SET AMOUNT = AMOUNT-1 
+ 		 WHERE DCODE = ${param1} 
+           AND ITEMKIND LIKE '도시락' 
+           AND OWNER LIKE '${param2}'
+	</update>
+	
+	<update id="updateRegTicket">
+		UPDATE ITEM 
+   		   SET AMOUNT = AMOUNT-1 
+ 		 WHERE TCODE = ${param1} 
+           AND ITEMKIND LIKE '티켓' 
+           AND OWNER LIKE '${param2}'
+	</update>
+	
 </mapper>

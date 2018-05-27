@@ -81,16 +81,16 @@
 					<div id="mybag-title">내 가방</div>
 					<div class="col-md-6">
 						<div class="item-slot inbag">
-							<a href="#" data-backdrop="static" data-target="#cancleInfoModal" data-toggle="modal">
-								<img title="${b.dimgname}" class="item-slot-image" src="../images/${b.dimgname}" alt="" />	
+							<a href="#" data-backdrop="static" data-target="#cancelDosirakInfoModal" data-toggle="modal">
+								<img title="${b.dimgname}" class="cancelD" src="../images/${b.dimgname}" alt="" />	
 							</a>
 						</div>
 					</div>
 
 					<div class="col-md-6">
 						<div class="item-slot inbag">
-							<a href="#" data-backdrop="static" data-target="#cancleInfoModal" data-toggle="modal">
-								<img title="${b.timgname}" class="item-slot-image" src="../images/${b.timgname}" alt="" />	
+							<a href="#" data-backdrop="static" data-target="#cancelTicketInfoModal" data-toggle="modal">
+								<img title="${b.timgname}" class="cancelT" src="../images/${b.timgname}" alt="" />	
 							</a>
 						</div>
 					</div>
@@ -98,57 +98,79 @@
 			</div>
 			<div class="col-md-3">
 				<div id="gameBtns">
-					<a href="#" class="btn btn-warning"><img class="icon"
-						src="../images/backpack.png" /> 내가방</a> <a href="collection.jsp"
-						class="btn btn-warning"><img class="icon"
-						src="../images/inventory.png" /> 수집품</a> <a href="../shop/shop.jsp"
-						class="btn btn-warning"><img class="icon"
-						src="../images/store.png" /> 상점 </a>
+					<a href="#" class="btn btn-warning">
+						<img class="icon" src="../images/backpack.png" /> 내가방
+					</a> 
+					<a href="collection.jsp" class="btn btn-warning">
+						<img class="icon" src="../images/inventory.png" /> 수집품
+					</a>
+					<a href="../shop/shop.jsp" class="btn btn-warning">
+						<img class="icon" src="../images/store.png" /> 상점
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
- 	<div class="modal fade" id="itemInfoModal">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button data-dismiss="modal" class="close" type="button">&times;</button>
-					<h3>아이템 정보</h3>
-				</div>
-
-				<div id="itemModalBody" class="modal-body"></div>
-
-				<div class="modal-footer">
-					<a id="equip" href="#" class="btn btn-info">장 착</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	<form action="inventoryReg.do" method="post">
+	 	<div class="modal fade" id="itemInfoModal">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button data-dismiss="modal" class="close" type="button">&times;</button>
+						<h3>아이템 정보</h3>
+					</div>
 	
-	<div class="modal fade" id="cancleInfoModal">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button data-dismiss="modal" class="close" type="button">&times;</button>
-					<h3>아이템 정보</h3>
-				</div>
-
-				<div id="itemModalBody" class="modal-body"></div>
-
-				<div class="modal-footer">
-					<a id="equip" href="#" class="btn btn-info">해 제</a>
+					<div id="itemModalBody" class="modal-body"></div>
+	
+					<div class="modal-footer">
+						<button id="equip" type="submit" class="btn btn-info">장 착</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</form>
+		
+	<form action="inventoryDproc.do" method="post">
+		<div class="modal fade" id="cancelDosirakInfoModal">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button data-dismiss="modal" class="close" type="button">&times;</button>
+						<h3>아이템 정보</h3>
+					</div>
+	
+					<div id="itemCancelDModalBody" class="modal-body"></div>
+		
+					<div class="modal-footer">
+						<button id="equip" type="submit" class="btn btn-info">해 제</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	<form action="inventoryTproc.do" method="post">
+		<div class="modal fade" id="cancelTicketInfoModal">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button data-dismiss="modal" class="close" type="button">&times;</button>
+						<h3>아이템 정보</h3>
+					</div>
+	
+					<div id="itemCancelTModalBody" class="modal-body"></div>
+	
+					<div class="modal-footer">
+						<button id="equip" type="submit" class="btn btn-info">해 제</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 
 </body>
 <script type="text/javascript">
-
-/* $(document).on("click", ".clone", function(){
-	$(this).clone().appendTo($(".cloneCanvas"));
-}); */
 
 	$(function() {
 		$(document).on("click", ".item-slot-image", function(){
@@ -174,14 +196,54 @@
 	        	  }else if(kind == '명물') {
 	        		  alert(kind);
 	        		  printData3(resData); 
-	        	  }
-	        	  
+	        	  }  
+	          }
+	       });
+	    });
+	});
+
+	$(function() {
+		$(document).on("click", ".cancelD", function(){
+	  		var img = $(this).attr("title");
+	  		alert("도시락 캔슬 성공");
+	    	$.ajax({
+	          url: "inventoryCancelDModal.do",         // 필수 ! 요청 페이지
+	          type: "GET",
+			  data: {"img" : img},
+			  // data: {"owner" : "KHJ@KHJ.COM"},
+	          error: function(jqXHR) {
+	             alert(jqXHR.status);
+	             alert(jqXHR.statusText);
+	          },
+	          dataType: "json",
+	          success: function(resData) {         // 필수!! 그에 대응되는 결과
+	        	  printData4(resData);  
+	          }
+	       });
+	    });
+ 	});
+	
+	$(function() {
+		$(document).on("click", ".cancelT", function(){
+	  		var img = $(this).attr("title");
+	  		alert("티켓 캔슬 성공");
+	    	$.ajax({
+	          url: "inventoryCancelTModal.do",         // 필수 ! 요청 페이지
+	          type: "GET",
+			  data: {"img" : img},
+			  // data: {"owner" : "KHJ@KHJ.COM"},
+	          error: function(jqXHR) {
+	             alert(jqXHR.status);
+	             alert(jqXHR.statusText);
+	          },
+	          dataType: "json",
+	          success: function(resData) {         // 필수!! 그에 대응되는 결과
+	        	  printData5(resData);
 	          }
 	       });
 	    });
  	});
  	
-
 	$(function() {
 	    $(".tab1").click(function () {
 	       $.ajax({
@@ -201,7 +263,6 @@
 		 });
 	 });
 	 
-	
 	$(function() {
 		$(".tab2").click(function() {
 			$.ajax({
@@ -247,6 +308,8 @@
 			+ '<div class="col-md-8"><ul id="itemModalList">'
 			+ '<li>이름 : '+resData["dName"]+'</li>'
 			+ '<li>종류 : '+"도시락"+'</li>'
+			+ '<input name="inventoryKind" type="hidden" value="도시락"/>'
+			+ '<input name="inventoryCode" type="hidden" value="'+resData["dCode"]+'"/>'
 			+ '<li>가격 : '+resData["price"]+"골드"+'</li>'
 			+ '<li>효과 : </li></ul></div>'
 			$("#itemModalBody").html(result);
@@ -263,6 +326,8 @@
 			+ '<div class="col-md-8"><ul id="itemModalList">'
 			+ '<li>이름 : '+resData["tName"]+'</li>'
 			+ '<li>종류 : '+"티켓"+'</li>'
+			+ '<input name="inventoryKind" type="hidden" value="티켓"/>'
+			+ '<input name="inventoryCode" type="hidden" value="'+resData["tCode"]+'"/>'
 			+ '<li>가격 : '+resData["price"]+"골드"+'</li>'
 			+ '<li>효과 : </li></ul></div>'
 			$("#itemModalBody").html(result);
@@ -282,57 +347,39 @@
 		
 	}
 	
-	/* function printData(resData) {
+	function printData4(resData) {
 		
 		var result = "";
-		alert(resData["dCode"]);
-		alert(resData["tCode"]);
-		alert(resData["gCode"]);
 		
-		if(resData["dCode"] != 'undefined') {
+		result += '<div class="col-md-4">'
+			+ '<img id="modalImage" src="../images/'+resData["imgName"]+'" alt="" /></div>'
+			+ '<input id="dCode" type="hidden" name="sdCode" value='+resData["dCode"]+' />'
+			+ '<div class="col-md-8"><ul id="itemModalList">'
+			+ '<li>이름 : '+resData["dName"]+'</li>'
+			+ '<li>종류 : '+"도시락"+'</li>'
+			+ '<li>가격 : '+resData["price"]+"골드"+'</li>'
+			+ '<li>효과 : </li></ul></div>'
+			$("#itemCancelDModalBody").html(result);
 			
-			alert("도시락 성공");
-			
-			result += '<div class="col-md-4">'
-				+ '<img id="modalImage" src="../images/'+resData["imgName"]+'" alt="" /></div>'
-				+ '<div class="col-md-8"><ul id="itemModalList">'
-				+ '<li>이름 : '+resData["dName"]+'</li>'
-				+ '<li>종류 : '+"도시락"+'</li>'
-				+ '<li>가격 : '+resData["price"]+"골드"+'</li>'
-				+ '<li>효과 : </li></ul></div>'
-				$("#itemModalBody").html(result);
-				
-			alert(result);
-			
-		} else if(resData["tCode"] != 'undefined') {
-			
-			alert("티켓 성공");
-			
-			result += '<div class="col-md-4">'
-				+ '<img id="modalImage" src="../images/'+resData["imgName"]+'" alt="" /></div>'
-				+ '<div class="col-md-8"><ul id="itemModalList">'
-				+ '<li>이름 : '+resData["tName"]+'</li>'
-				+ '<li>종류 : '+"티켓"+'</li>'
-				+ '<li>가격 : '+resData["price"]+"골드"+'</li>'
-				+ '<li>효과 : </li></ul></div>'
-				$("#itemModalBody").html(result);
-			
-		} else if(resData["gCode"] != 'undefined') {
-			
-			alert("명물 성공");
-			
-			result += '<div class="col-md-4">'
-				+ '<img id="modalImage" src="../images/'+resData["imgName"]+'" alt="" /></div>'
-				+ '<div class="col-md-8"><ul id="itemModalList">'
-				+ '<li>이름 : '+resData["gName"]+'</li>'
-				+ '<li>종류 : '+"명물"+'</li>'
-				+ '<li>효과 : </li></ul></div>'
-				$("#itemModalBody").html(result);
-			
-		}
+		alert(result);
+	
+	}
+	
+	function printData5(resData) {
 		
-	} */
-
+		var result = "";
+		
+		result += '<div class="col-md-4">'
+			+ '<img id="modalImage" src="../images/'+resData["imgName"]+'" alt="" /></div>'
+			+ '<input id="tCode" type="hidden" name="stCode" value="'+resData["tCode"]+'" />'
+			+ '<div class="col-md-8"><ul id="itemModalList">'
+			+ '<li>이름 : '+resData["tName"]+'</li>'
+			+ '<li>종류 : '+"티켓"+'</li>'
+			+ '<li>가격 : '+resData["price"]+"골드"+'</li>'
+			+ '<li>효과 : </li></ul></div>'
+			$("#itemCancelTModalBody").html(result);
+		
+	}
 	function printData(resData) {
 		var result = "";
 
