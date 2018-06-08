@@ -8,6 +8,10 @@
 		SELECT * FROM PICTURE WHERE PCODE = #{pCode}
 	</select>
 	
+	<select id="getCityPicture" resultType="com.dosirak.web.vo.Picture">
+		SELECT * FROM PICTURE WHERE CITY = #{city}
+	</select>
+	
 	<select id="getPictureList" resultType="com.dosirak.web.vo.Picture">
 		SELECT * FROM PICTURE
 	</select>

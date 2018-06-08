@@ -4,13 +4,45 @@
 
 <mapper namespace="com.dosirak.web.dao.PlayerDAO">
 
+	<select id="getAllPlayer" resultType="com.dosirak.web.vo.Player">
+      SELECT * FROM PLAYER
+   </select>
+
    <select id="getPlayer" resultType="com.dosirak.web.vo.Player">
       SELECT * FROM PLAYER WHERE MID = #{mid}
    </select>
-   <!-- 인자가 하나일 경우 변수명 그대로 -->
    
    <insert id="addPlayer">
-      INSERT INTO PLAYER(MID, PWD, GOLD, STATUS, ISONLINE, REGDATE, NICKNAME) VALUES(#{mid}, #{pwd}, 0, 'HOME', 'NO', SYSDATE, #{nickname})
+      INSERT INTO PLAYER(MID, PWD, STATUS, ISONLINE, NICKNAME, IMGNAME) VALUES(#{mid}, #{pwd}, 'HOME', 'NO', #{nickname}, 'FROG1.jpg')
    </insert>
    
+   <update id="updateWorkPlayer">
+  		UPDATE PLAYER
+   		   SET STATUS = 'WORK'
+ 		 WHERE MID LIKE #{owner}
+   </update>
+   
+   <update id="updateHomePlayer">
+  		UPDATE PLAYER
+   		   SET STATUS = 'HOME',
+   		   	   GOLD = GOLD+#{param2}
+ 		 WHERE MID LIKE #{param1}
+   </update>
+   
+   <update id="updateTravelPlayer">
+  		UPDATE PLAYER
+   		   SET STATUS = 'TRAVEL', LOC = #{param2}
+ 		 WHERE MID LIKE #{param1}
+   </update>
+   
+   <select id="getTravelPlayer" resultType="com.dosirak.web.vo.Player">
+   		SELECT * FROM PLAYER WHERE MID !=  #{param1} AND STATUS = 'TRAVEL' AND LOC = #{param2}
+   </select>
+   
+   <update id="updateHomeafterTravelPlayer">
+  		UPDATE PLAYER
+   		   SET STATUS = 'HOME'
+ 		WHERE MID LIKE #{owner}
+   </update>
+
 </mapper>

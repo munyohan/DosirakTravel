@@ -1,0 +1,99 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dosirak.web.dao.HistoryDAO">
+
+	<insert id="insertBeforeWorkHistory">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(SEQ))+1 FROM HISTORY
+		</selectKey>
+			INSERT INTO HISTORY (SEQ, KIND, DOINGUSER, GOLD, ACTDATE)
+  			VALUES(#{seq}, '일', #{param1}, #{param2}, SYSDATE + 1/24/60) <!-- 일 하고 돌아오는 시간(30분 후) 계산을 위해 사용 -->
+	</insert>
+
+	<insert id="insertWorkHistory">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(SEQ))+1 FROM HISTORY
+		</selectKey>
+			INSERT INTO HISTORY (SEQ, KIND, DOINGUSER, GOLD, PRICE, ACTDATE)
+  			VALUES(#{seq}, '일', #{param1}, #{param2}, #{param3}, SYSDATE)
+	</insert>
+	
+	<select id="getComeBackHomeTime" resultType="String">
+		SELECT H1.ACTDATE
+		  FROM ( SELECT ROWNUM AS RN, H.*
+		           FROM (SELECT ACTDATE 
+		                   FROM HISTORY 
+		                  WHERE KIND = #{param2} 
+		                    AND DOINGUSER LIKE #{param1} ORDER BY SEQ DESC
+		                ) H
+		       ) H1
+		 WHERE RN = 1
+	</select>
+	
+	<insert id="insertBeforeTravelHistory">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(SEQ))+1 FROM HISTORY
+		</selectKey>
+			INSERT INTO HISTORY (SEQ, KIND, DOINGUSER, ACTDATE)
+  			VALUES(#{seq}, '여행', #{param1}, SYSDATE + #{param2}/24/60) <!-- city테이블 traveltime '분'으로 쓰기!!!!! -->
+	</insert>
+	
+	<select id="getHistoryCode" resultType="Integer">
+		SELECT CODE 
+	           FROM HISTORY
+	          WHERE DOINGUSER LIKE #{param1}
+	            AND KIND LIKE #{param2} GROUP BY CODE
+	</select>
+	
+	<insert id="insertTravelHistory">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(SEQ))+1 FROM HISTORY
+		</selectKey>
+			INSERT INTO HISTORY (SEQ, KIND, DOINGUSER, CODE, ACTDATE)
+  			VALUES(#{seq}, #{param2}, #{param1}, #{param3}, SYSDATE)
+	</insert>
+	
+	<insert id="insertTravelFriendHistory">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(SEQ))+1 FROM HISTORY
+		</selectKey>
+			INSERT INTO HISTORY (SEQ, KIND, DOINGUSER, FRIENDUSER, ACTDATE)
+  			VALUES(#{seq}, '친구집', #{param1}, #{param2}, SYSDATE)
+	</insert>
+	
+	<!-- <select id="getRecordHistory" resultType="com.dosirak.web.vo.History">
+	<![CDATA[  
+		SELECT H.* 
+		  FROM (SELECT * 
+		  		  FROM HISTORY 
+		  		 WHERE DOINGUSER LIKE #{owner}
+		  		   AND KIND IN ('명물획득', '사진획득') ORDER BY SEQ DESC) H
+		 WHERE ROWNUM < 3
+	]]>
+	</select> -->
+	
+	<select id="getRecordHistory" resultType="com.dosirak.web.vo.Record">
+	<![CDATA[  
+		SELECT H3.CODE, H3.FRIENDUSER AS FID, G.GNAME, G.CITY 
+  		  FROM (SELECT 
+                (SELECT H.CODE 
+                  FROM (SELECT * 
+                          FROM HISTORY 
+                         WHERE DOINGUSER LIKE #{owner}
+                           AND KIND IN ('명물획득') ORDER BY SEQ DESC) H
+                 WHERE ROWNUM = 1) CODE,
+                (SELECT H.FRIENDUSER 
+                   FROM (SELECT * 
+                           FROM HISTORY 
+                          WHERE DOINGUSER LIKE #{owner}
+                            AND KIND IN ( '친구집') ORDER BY SEQ DESC) H
+                  WHERE ROWNUM = 1) FRIENDUSER
+          		FROM HISTORY 
+ 	  WHERE ROWNUM = 1 ) H3 LEFT OUTER JOIN GIFT G
+    	 ON H3.CODE = G.GCODE
+	]]>
+	</select>
+
+</mapper>

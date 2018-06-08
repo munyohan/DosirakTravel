@@ -9,9 +9,9 @@ import com.dosirak.web.vo.City;
 public class CityDAOImpl extends SqlSessionDaoSupport implements CityDAO{
 
 	@Override
-	public City getCity(String city) {
+	public City getCity(int clevel, String mycountry) {
 		CityDAO cdao = getSqlSession().getMapper(CityDAO.class);
-		return cdao.getCity(city);
+		return cdao.getCity(clevel, mycountry);
 	}
 
 	@Override

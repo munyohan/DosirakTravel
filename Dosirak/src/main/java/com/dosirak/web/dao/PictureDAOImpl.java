@@ -25,4 +25,10 @@ public class PictureDAOImpl extends SqlSessionDaoSupport implements PictureDAO{
 		PictureDAO pdao = getSqlSession().getMapper(PictureDAO.class);
 		return pdao.takePicture(owner);
 	}
+
+	@Override
+	public Picture getCityPicture(String city) {
+		PictureDAO pdao = getSqlSession().getMapper(PictureDAO.class);
+		return pdao.getCityPicture(city);
+	}
 }

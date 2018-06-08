@@ -5,11 +5,15 @@
 <mapper namespace="com.dosirak.web.dao.CityDAO">
 
 	<select id="getCity" resultType="com.dosirak.web.vo.City">
-		SELECT * FROM CITY WHERE CITY = #{city}
+		SELECT * FROM CITY WHERE CLEVEL = #{param1} AND MYCOUNTRY = #{param2}
 	</select>
 
 	<select id="getCityList" resultType="com.dosirak.web.vo.City">
 		SELECT * FROM CITY
+	</select>
+	
+	<select id="getCountryCityList" resultType="com.dosirak.web.vo.City">
+		SELECT * FROM CITY WHERE MYCOUNTRY LIKE #{myCountry}
 	</select>
 
 </mapper>

@@ -6,7 +6,7 @@ public class Gift {
 	private String city;
 	private String imgName;
 	private String info;
-	
+	private String weight;
 	
 	public int getgCode() {
 		return gCode;
@@ -38,4 +38,11 @@ public class Gift {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+	
 }

@@ -5,6 +5,8 @@ public class Friend {
 	private String mid;
 	private String fid;
 	private String regdate;
+	private String imgname;
+	private String vnickname;
 	
 	public int getfCode() {
 		return fCode;
@@ -29,6 +31,18 @@ public class Friend {
 	}
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+	public String getImgname() {
+		return imgname;
+	}
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
+	public String getVnickname() {
+		return vnickname;
+	}
+	public void setVnickname(String vnickname) {
+		this.vnickname = vnickname;
 	}
 	
 }

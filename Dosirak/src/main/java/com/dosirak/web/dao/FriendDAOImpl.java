@@ -19,4 +19,17 @@ public class FriendDAOImpl extends SqlSessionDaoSupport implements FriendDAO{
 		FriendDAO fdao = getSqlSession().getMapper(FriendDAO.class);
 		return fdao.getPlayerFriendList(mid);
 	}
+
+	@Override
+	public Friend getPlayerFriend(String mid, String fid) {
+		FriendDAO fdao = getSqlSession().getMapper(FriendDAO.class);
+		return fdao.getPlayerFriend(mid, fid);
+	}
+
+	@Override
+	public int addFriend(String mid, String fid, String imgname, String vnickname) {
+		FriendDAO fdao = getSqlSession().getMapper(FriendDAO.class);
+		return fdao.addFriend(mid, fid, imgname, vnickname);
+	}
+	
 }

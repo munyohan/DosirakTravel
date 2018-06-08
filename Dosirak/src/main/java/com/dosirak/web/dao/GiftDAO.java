@@ -9,4 +9,6 @@ public interface GiftDAO {
 	public Gift getGiftimg(String imgName);
 	public List<Gift> getGiftList();	// 명물 전체 불러오기
 	public int takeGift(Gift gift, String owner);				// 명물 한 개 유저에게 주기
+	
+	public Gift getTravelGift(String city, String weight);
 }

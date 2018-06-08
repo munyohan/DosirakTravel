@@ -9,7 +9,7 @@ public class Player {
 	private String date;
 	private String loc;
 	private String nickname;
-	
+	private String imgName;
 	
 	public String getNickname() {
 		return nickname;
@@ -58,5 +58,11 @@ public class Player {
 	}
 	public void setLoc(String loc) {
 		this.loc = loc;
+	}
+	public String getImgName() {
+		return imgName;
+	}
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
 	}
 }

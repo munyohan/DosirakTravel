@@ -10,5 +10,16 @@
 	<select id="getPlayerFriendList" resultType="com.dosirak.web.vo.Friend">
 		SELECT * FROM FRIEND WHERE MID = #{mid}
 	</select>
-
+	
+	<select id="getPlayerFriend" resultType="com.dosirak.web.vo.Friend">
+		SELECT * FROM FRIEND WHERE MID = #{param1} AND FID = #{param2}
+	</select>
+	
+	<insert id="addFriend">
+		<selectKey order="BEFORE" keyProperty="seq" resultType="String">
+			SELECT MAX(TO_NUMBER(FCODE))+1 FROM FRIEND
+		</selectKey>
+    	INSERT INTO FRIEND VALUES(#{seq}, #{param1}, #{param2}, SYSDATE, #{param3}, #{param4})
+    </insert>
+	
 </mapper>

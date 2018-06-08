@@ -19,5 +19,9 @@
 		INSERT INTO ITEM
 		VALUES(#{param1.gCode}, #{param1.gName}, #{param1.city}, #{param1.imgName}, #{param1.info});
 	</insert>
-
+	
+	<select id="getTravelGift" resultType="com.dosirak.web.vo.Gift">
+		SELECT * FROM GIFT WHERE CITY LIKE #{param1} AND WEIGHT = #{param2}
+	</select>
+	
 </mapper>

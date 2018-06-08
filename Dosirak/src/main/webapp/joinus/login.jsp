@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style type="text/css">
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 html, body {
@@ -250,34 +251,54 @@ html, body {
   -webkit-transition: all .3s ease;
 }
 </style>
+<script type="text/javascript">
+$(function() {
+	var joinok = "${joinok}";
+	if(joinok == "1"){
+		alert("회원가입 성공!");
+	}
+});
+
+$(function() {
+	$("#signup-form").submit(function(event) {
+		if($("#pwd").val() == "") {
+			alert("비밀번호를 입력해주세요.");
+			event.preventDefault();
+		} else if( $("#pwd").val() != $("#pwdcheck").val() ) {
+			alert("비밀번호가 일치하지 않습니다.");
+			event.preventDefault();
+		}
+	});
+});
+</script>
 </head>
 <body>
 	<div class="form-structor">
-      <form action="join.do" method="post">
+      <form action="join.do" method="post" id="signup-form">
          <div class="signup">
-            <h2 class="form-title" id="signup">ȸ������</h2>
+            <h2 class="form-title" id="signup">회원가입</h2>
             <div class="form-holder">
-               <input id="mid" type="email" class="input" placeholder="Email" />
-               <input id="nickname" type="text" class="input" placeholder="NickName" />
-               <input id="pwd" type="password" class="input" placeholder="Password" />
-               <input id="pwdcheck" type="password" class="input" placeholder="PasswordCheck" />
+               <input id="mid" name="mid" type="email" class="input" placeholder="Email" />
+               <input id="nickname" name="nickname" type="text" class="input" placeholder="NickName" />
+               <input id="pwd" name="pwd" type="password" class="input" placeholder="Password" />
+               <input id="pwdcheck" name="pwdcheck" type="password" class="input" placeholder="Password Check" />
             </div>
-            <button class="submit-btn">����</button>
+            <button class="submit-btn submit-signup">가입</button>
          </div>
       </form>
-      
       <form action="login.do" method="post">
          <div class="login slide-up">
             <div class="center">
-               <h2 class="form-title" id="login">�α���</h2>
+               <h2 class="form-title" id="login">로그인</h2>
                <div class="form-holder">
                   <input id="mid" name="mid" type="email" class="input" placeholder="Email" />
                   <input id="pwd" name="pwd" type="password" class="input" placeholder="Password" />
                </div>
-               <button class="submit-btn">���</button>
+               <button class="submit-btn">출발</button>
             </div>
          </div>
       </form>
+      
    </div>
 <script type="text/javascript">
 console.clear();
@@ -308,6 +329,29 @@ signupBtn.addEventListener('click', (e) => {
 		}
 	});
 });
+
+
+
+
+// $(function() {
+//     $(".submit-signup").click(function () {
+//        $.ajax({
+//           url: "join.do",         // 필수 ! 요청 페이지
+//           type: "POST",
+// 		  data: {"mid" : "${mid}", "pwd" : "${pwd}", "nickname" : "${nickname}"},
+//           error: function(jqXHR) {
+//              alert(jqXHR.status);
+//              alert(jqXHR.statusText);
+//           },
+//           dataType: "json",
+//           success: function(resData) {         // 필수!! 그에 대응되는 결과
+//         	  alert("회원가입 성공!");
+//           }
+//        });
+// 	 });
+// });
+ 
+
 </script>
 </body>
 </html>

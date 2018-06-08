@@ -11,7 +11,7 @@
 	<select id="getBackpackimg" resultType="com.dosirak.web.vo.Backpack">
 		SELECT B.OWNER,
 			   B.DCODE,
-			   B.MCODE,
+			   B.GCODE,
 			   B.TCODE,
 			   B.PCODE,
 			   D.IMGNAME AS DIMGNAME,
@@ -22,5 +22,26 @@
             ON B.TCODE = T.TCODE
 		  WHERE B.OWNER LIKE #{owner}
 	</select>
+	
+	<update id="updateDosirak">
+		UPDATE BACKPACK SET DCODE = 0 WHERE OWNER LIKE #{owner}
+	</update>
+
+	<update id="updateTicket">
+		UPDATE BACKPACK SET TCODE = 0 WHERE OWNER LIKE #{owner}
+	</update>
+	
+	<insert id="insertBmodal">
+		INSERT INTO BACKPACK (OWNER, DCODE, TCODE) VALUES ('${param1}', ${param2}, ${param3})
+	</insert>
+	
+	<update id="updateBDmodal">
+		UPDATE BACKPACK SET DCODE = ${param2} WHERE OWNER LIKE '${param1}'
+	</update>
+	
+	<update id="updateBTmodal">
+		UPDATE BACKPACK SET TCODE = ${param2} WHERE OWNER LIKE '${param1}'
+	</update>
+	
 
 </mapper>

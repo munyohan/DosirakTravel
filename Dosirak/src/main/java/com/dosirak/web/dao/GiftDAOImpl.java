@@ -31,4 +31,10 @@ public class GiftDAOImpl extends SqlSessionDaoSupport implements GiftDAO{
 		GiftDAO gdao = getSqlSession().getMapper(GiftDAO.class);
 		return gdao.getGiftimg(imgName);
 	}
+
+	@Override
+	public Gift getTravelGift(String city, String weight) {
+		GiftDAO gdao = getSqlSession().getMapper(GiftDAO.class);
+		return gdao.getTravelGift(city, weight);
+	}
 }
